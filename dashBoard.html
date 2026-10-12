@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Social Feed</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background-color: #f0f2f5;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1c1e21;
+        }
+        .composer {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            padding: 18px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .composer-profile {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .composer input {
+            flex: 1;
+            min-width: 0;
+            padding: 15px 20px;
+            border: 1px solid #e4e6eb;
+            border-radius: 30px;
+            background-color: #f0f2f5;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        .composer input:focus {
+            background-color: white;
+            border-color: #1d9bf0;
+            box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.12);
+        }
+        .outputDiv {
+    width: 100%;
+    max-width: 700px;
+    min-height: 100px;
+    height: auto;
+    margin: 0 auto 25px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    word-break: normal;
+    transition: box-shadow 0.3s ease;
+}
+
+.outputDiv:empty {
+    display: none;
+}
+
+.outputDiv:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 600px) {
+    .outputDiv {
+        padding: 18px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+    }
+}
+        .post-btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 25px;
+            background-color: #1d9bf0;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .post-btn:hover {
+            background-color: #1576bd;
+            transform: translateY(-2px);
+        }
+        .containerDiv {
+            width: 100%;
+            max-width: 700px;
+            min-height: 300px;
+            margin: 0 auto 25px;
+            padding: 25px;
+            padding-bottom: 85px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+            position: relative;
+            transition: box-shadow 0.3s ease,
+                        transform 0.3s ease;
+        }
+
+        .containerDiv:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        .post-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid #e4e6eb;
+        }
+
+        .post-text {
+            flex: 1;
+            min-width: 0;
+            margin: 5px 0 0;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            outline: none;
+        }
+        .post-image {
+            display: block;
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 12px;
+            margin-top: 15px;
+            background-color: #f0f2f5;
+        }
+        .buttons {
+            position: absolute;
+            bottom: 15px;
+            left: 25px;
+            right: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        .buttons button {
+            flex: 1;
+            padding: 11px 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-2px);
+        }
+
+        .buttons button:active {
+            transform: scale(0.97);
+        }
+
+        /* Repost */
+        .repost-btn {
+            background-color: #e8f5e9;
+            color: #218838;
+        }
+
+        .repost-btn:hover {
+            background-color: #c8e6c9;
+        }
+
+        /* Like */
+        .like-btn {
+            background-color: #fff0f3;
+            color: #e63959;
+        }
+
+        .like-btn:hover {
+            background-color: #ffd6df;
+        }
+
+        /* Share */
+        .share-btn {
+            background-color: #e8f3ff;
+            color: #1877f2;
+        }
+
+        .share-btn:hover {
+            background-color: #cfe5ff;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .composer {
+                padding: 12px;
+                margin-bottom: 20px;
+                gap: 8px;
+            }
+
+            .composer-profile {
+                width: 38px;
+                height: 38px;
+            }
+
+            .composer input {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .post-btn {
+                padding: 11px 14px;
+                font-size: 12px;
+            }
+
+            .containerDiv {
+                padding: 18px;
+                padding-bottom: 80px;
+                margin-bottom: 18px;
+                border-radius: 12px;
+            }
+
+            .profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+
+            .post-text {
+                font-size: 15px;
+            }
+
+            .post-image {
+                height: 230px;
+            }
+
+            .buttons {
+                left: 18px;
+                right: 18px;
+                bottom: 12px;
+                gap: 8px;
+            }
+
+            .buttons button {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+        }
+        .inputValueDiv{
+            display: flex;
+            justify-content: space-between;
+
+        }
+        .inputValueDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+
+    background-color: white;
+    border: 1px solid #e4e6eb;
+    border-radius: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+.inputValueDiv p {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.deleteBtn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ffe5e5;
+    color: #d93025;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.deleteBtn:hover {
+    background-color: #ffcaca;
+}
+    </style>
+</head>
+
+<body>
+    
+    <div class="composer">
+        <img
+            class="composer-profile"
+            src="wallpaper_5.jpeg"
+            alt="Your profile picture"
+        >
+
+        <input
+            type="text"
+            placeholder="Share your thoughts with everyone..."
+        id="inp1">
+
+        <button class="post-btn" onclick="postBtn()">Post</button>
+    </div>
+    <div id="output" class="outputDiv"></div>
+    <div class="containerDiv">
+        <div class="post-header">
+            <img
+                class="profile-pic"
+                src="wallpaper_5.jpeg"
+                alt="Profile picture"
+            >
+
+            <p class="post-text" contenteditable="true">
+                Feeling...great today.....might just post myself
+            </p>
+        </div>
+
+        <img
+            class="post-image"
+            src="wallpaper_2.jpeg"
+            alt="Post image"
+        >
+      
+        <div class="buttons">
+            <button class="repost-btn">Repost</button>
+            <button class="like-btn">Like</button>
+            <button class="share-btn">Share</button>
+        </div>
+    </div>
+    
+    <div class="containerDiv">
+        <div class="post-header">
+            <img
+                class="profile-pic"
+                src="wallpaper_5.jpeg"
+                alt="Profile picture"
+            >
+
+            <p class="post-text" contenteditable="true">
+                Today's football game....was the toughest I've ever played...
+                but we won though...
+            </p>
+        </div>
+
+        <img
+            class="post-image"
+            src="wallpaper_3.jpeg"
+            alt="Football post image"
+        >
+
+        <div class="buttons">
+            <button class="repost-btn">Repost</button>
+            <button class="like-btn">Like</button>
+            <button class="share-btn">Share</button>
+        </div>
+    </div>
+    <div class="containerDiv">
+        <div class="post-header">
+            <img
+                class="profile-pic"
+                src="wallpaper_5.jpeg"
+                alt="Profile picture"
+            >
+
+            <p class="post-text" contenteditable="true">
+                Enjoying the holiday....
+            </p>
+        </div>
+
+        <img
+            class="post-image"
+            src="wallpaper_4.jpeg"
+            alt="Holiday post image"
+        >
+
+        <div class="buttons">
+            <button class="repost-btn">Repost</button>
+            <button class="like-btn">Like</button>
+            <button class="share-btn">Share</button>
+        </div>
+    </div>
+    <div class="containerDiv">
+        <div class="post-header">
+            <img
+                class="profile-pic"
+                src="wallpaper_5.jpeg"
+                alt="Profile picture"
+            >
+
+            <p class="post-text" contenteditable="true">
+                Today's football game....was the toughest I've ever played...
+                but we won though...
+            </p>
+        </div>
+
+        <img
+            class="post-image"
+            src="wallpaper_5.jpeg"
+            alt="Football post image"
+        >
+
+        <div class="buttons">
+            <button class="repost-btn">Repost</button>
+            <button class="like-btn">Like</button>
+            <button class="share-btn">Share</button>
+        </div>
+    </div>
+  <script src="dashBoard.js"></script>
+</body>
+</html>
