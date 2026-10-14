@@ -1,75 +1,72 @@
-let fullName = document.getElementById('fullName');
-//let lastName = document.getElementById('lastName');
-//let otherNames = document.getElementById('otherNames');
+if (localStorage.getItem('loggedInUser')) {
+    window.location.replace('dashboard.html')
+}
+let userList = JSON.parse(localStorage.getItem('user')) || []
+let fullName = document.getElementById('fullName')
+//let lastName = document.getElementById('lastName')
+//let otherNames = document.getElementById('otherNames')
+let email = document.getElementById('emailPass')
+let passWord = document.getElementById('passWord')
+let confirmPass = document.getElementById('confirmPass')
+let responseField = document.getElementById('responseField')
 
-let email = document.getElementById('emailPass');
-let passWord = document.getElementById('passWord');
-let confirmPass = document.getElementById('confirmPass');
-let responseField = document.getElementById('responseField');
-
-let userList = [];
 
 function signUp() {
-    let fullNameValue = fullName.value.trim();
-    // let lastNameValue = lastName.value.trim();
-    let emailValue = email.value.trim();
-    let passValue = passWord.value.trim();
-    let confirmPassValue = confirmPass.value.trim();
+    let fullNameValue = fullName.value.trim()
+    let emailValue = email.value.trim().toLowerCase()   // FIX: lowercase the email
+    let passValue = passWord.value.trim()
+    let confirmPassValue = confirmPass.value.trim()
 
     if (!fullNameValue) {
-        responseField.innerHTML = 'Fullname is required.';
+        responseField.innerHTML = 'Fullname is required.'
+        responseField.style.color = 'red'
         return;
-
     } else if (fullNameValue.length < 2) {
-        responseField.innerHTML = 'Fullname must be a minumum of 2 characters';
+        responseField.innerHTML = 'Fullname must be a minimum of 2 characters'
+        responseField.style.color = 'red'
         return;
-
     } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
-        responseField.innerHTML = 'Email is invalid';
+        responseField.innerHTML = 'Email is invalid'
+        responseField.style.color = 'red'
         return;
-
     } else if (!passValue) {
-        responseField.innerHTML = 'Please enter your password';
+        responseField.innerHTML = 'Please enter your password'
+        responseField.style.color = 'red'
         return;
-
     } else if (passValue.length < 6) {
-        responseField.innerHTML = 'Password must be more than 6 characters';
+        responseField.innerHTML = 'Password must be at least 6 characters'
+        responseField.style.color = 'red'
         return;
-
     } else if (!confirmPassValue) {
-        responseField.innerHTML = 'Oga confirm your password';
+        responseField.innerHTML = 'Oga confirm your password'
+        responseField.style.color = 'red'
         return;
-
     } else if (confirmPassValue !== passValue) {
-        responseField.innerHTML = 'Password Mismatch';
+        responseField.innerHTML = 'Password Mismatch'
+        responseField.style.color = 'red'
         return;
     }
 
-    // Check if the email already exists
     let userFound = userList.find((val) => {
-        return val.email.toLowerCase() === emailValue.toLowerCase();
-    });
+        return val.email === emailValue
+    })
 
     if (userFound) {
-        responseField.innerHTML = 'User already exists. Please use different Email';
-        alert('User already exist. Please use different Email');
+        responseField.innerHTML = 'User already exists. Please use a different email.'
+        responseField.style.color = 'red'
         return;
     }
 
-    // Register the user only if all validations pass
     userList.push({
         fullName: fullNameValue,
         email: emailValue,
-        passWord: passValue,
-        confirmPass: confirmPassValue
-    });
+        passWord: passValue
+    })
 
-    responseField.innerHTML = 'User signed up successfully';
-    alert('User signed up successfully');
+    localStorage.setItem('user', JSON.stringify(userList))
 
-    console.log(userList);
-    console.log(passValue);
-    console.log(confirmPassValue);
-
-    window.location.href = "dashBoard.html";
+    responseField.innerHTML = 'User signed up successfully'
+    responseField.style.color = 'green'
+localStorage.setItem('loggedInUser', JSON.stringify({ fullName: fullNameValue, email: emailValue }))
+    window.location.href = "dashboard.html";
 }

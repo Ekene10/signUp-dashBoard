@@ -1,22 +1,33 @@
+if (!localStorage.getItem('loggedInUser')) {
+    window.location.replace('signUp/login.html')
+}
+
 let input = document.getElementById('inp1')
 let output = document.getElementById('output')
 
 function postBtn() {
     let inputValue = input.value.trim()
-     output.innerHTML += `<div class="inputValueDiv">${inputValue} <button onclick="deleteBtn()" class="deleteBtn">Delete</button></div>`;
-     if (!inputValue) {
-      //  output.innerHTML = `<p style="color: red; font-weight: bold;">Oops.....sorry....Can't post NothinG</p>`
-     //      return
+
+    if (!inputValue) {
         alert('Oops.....sorry....Cannot post NothinG')
         return
     }
-   
+
+    output.innerHTML += `<div class="inputValueDiv">${inputValue} <button onclick="deleteBtn(this)" class="deleteBtn">Delete</button></div>`;
+
     console.log(inputValue);
-   
-   
-        input.value = ''
-     
+    input.value = ''
 }
-   function deleteBtn(button) {
+
+function deleteBtn(button) {
     button.parentElement.remove()
- }                    
+}
+
+function logOut() {
+    localStorage.removeItem('loggedInUser')   // FIX: clear the login flag
+    window.location.replace('signUp/login.html')
+}
+
+function logout() {   // FIX: same thing, so either button spelling works
+    logOut()
+}
