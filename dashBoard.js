@@ -1,33 +1,53 @@
-if (!localStorage.getItem('loggedInUser')) {
-    window.location.replace('signUp/login.html')
+let users = JSON.parse(localStorage.getItem('userPractice')) || []
+let currentUserIndex = JSON.parse(localStorage.getItem('currentUserIndex'))
+  // userEmailField.innerHTML = currentUser.emailField
+
+let currentUser =users[currentUserIndex] 
+function post() {
+    let titleInput = document.getElementById('inputTitle')
+    let textInput = document.getElementById('textArea')
+    let title = titleInput.value.trim()
+    let textPost = textInput.value.trim()
+    let output = document.getElementById('output')
+    if (!title || !textPost) {
+    output.innerHTML= responseField;
+    return;
 }
+    let responseField =  `<div class="post">
+    <div class="post-head">
+        <div class="avatar">E</div>
+        <div>
+            <div class="author">Ekene</div>
+            <div class="date">${new Date().toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"})}</div>
+        </div>
+    </div>
+    <h3>${title}</h3>
+    <p>${textPost}</p>
+    
+</div>`
+    
+  //  output.innerHTML += 
+   
+    output.innerHTML = responseField + output.innerHTML
+     titleInput.value = ''
+    textInput.value = ''
+}
+function authenticateUser(params) {
+    if (!currentUser) {
+        location.href = 'newLogin.html'
+    } else {
+        let userEmailField = document.getElementById('userEmailField');
 
-let input = document.getElementById('inp1')
-let output = document.getElementById('output')
-
-function postBtn() {
-    let inputValue = input.value.trim()
-
-    if (!inputValue) {
-        alert('Oops.....sorry....Cannot post NothinG')
-        return
+        
+    } if (userEmailField) {
+        userEmailField.innerHTML = currentUser.emailField
     }
-
-    output.innerHTML += `<div class="inputValueDiv">${inputValue} <button onclick="deleteBtn(this)" class="deleteBtn">Delete</button></div>`;
-
-    console.log(inputValue);
-    input.value = ''
 }
-
-function deleteBtn(button) {
-    button.parentElement.remove()
-}
-
+authenticateUser()
 function logOut() {
-    localStorage.removeItem('loggedInUser')   // FIX: clear the login flag
-    window.location.replace('signUp/login.html')
-}
-
-function logout() {   // FIX: same thing, so either button spelling works
-    logOut()
+    let logOutUser = confirm("Are you sure you want to log out?")
+    if (logOutUser) {
+        localStorage.removeItem('currentUserIndex')
+        window.location.href = "newlogin.html";
+    }
 }

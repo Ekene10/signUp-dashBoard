@@ -3,344 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Social Feed</title>
+    <title>Document</title>
+</head>
+<style>
+    * { box-sizing: border-box; }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 30px 15px;
-            background-color: #f0f2f5;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #1c1e21;
-        }
-        .composer {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            padding: 18px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .composer-profile {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .composer input {
-            flex: 1;
-            min-width: 0;
-            padding: 15px 20px;
-            border: 1px solid #e4e6eb;
-            border-radius: 30px;
-            background-color: #f0f2f5;
-            font-size: 15px;
-            outline: none;
-            transition: 0.3s ease;
-        }
-
-        .composer input:focus {
-            background-color: white;
-            border-color: #1d9bf0;
-            box-shadow: 0 0 0 3px rgba(29, 155, 240, 0.12);
-        }
-        .outputDiv {
-    width: 100%;
-    max-width: 700px;
-    min-height: 100px;
-    height: auto;
-    margin: 0 auto 25px;
-    padding: 25px;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
-    box-sizing: border-box;
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
-    word-break: normal;
-    transition: box-shadow 0.3s ease;
+body {
+    margin: 0;
+    padding-bottom: 40px;
+    background: #f4f5fb;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #111827;
 }
 
-.outputDiv:empty {
-    display: none;
-}
-
-.outputDiv:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 600px) {
-    .outputDiv {
-        padding: 18px;
-        margin-bottom: 18px;
-        border-radius: 12px;
-    }
-}
-        .post-btn {
-            padding: 12px 22px;
-            border: none;
-            border-radius: 25px;
-            background-color: #1d9bf0;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .post-btn:hover {
-            background-color: #1576bd;
-            transform: translateY(-2px);
-        }
-        .containerDiv {
-            width: 100%;
-            max-width: 700px;
-            min-height: 300px;
-            margin: 0 auto 25px;
-            padding: 25px;
-            padding-bottom: 85px;
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
-            position: relative;
-            transition: box-shadow 0.3s ease,
-                        transform 0.3s ease;
-        }
-
-        .containerDiv:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-            transform: translateY(-2px);
-        }
-        .post-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .profile-pic {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            border: 2px solid #e4e6eb;
-        }
-
-        .post-text {
-            flex: 1;
-            min-width: 0;
-            margin: 5px 0 0;
-            font-size: 16px;
-            line-height: 1.6;
-            overflow-wrap: anywhere;
-            outline: none;
-        }
-        .post-image {
-            display: block;
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 12px;
-            margin-top: 15px;
-            background-color: #f0f2f5;
-        }
-        .buttons {
-            position: absolute;
-            bottom: 15px;
-            left: 25px;
-            right: 25px;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            border-top: 1px solid #eee;
-            padding-top: 12px;
-        }
-
-        .buttons button {
-            flex: 1;
-            padding: 11px 15px;
-            border: none;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .buttons button:hover {
-            transform: translateY(-2px);
-        }
-
-        .buttons button:active {
-            transform: scale(0.97);
-        }
-
-        /* Repost */
-        .repost-btn {
-            background-color: #e8f5e9;
-            color: #218838;
-        }
-
-        .repost-btn:hover {
-            background-color: #c8e6c9;
-        }
-
-        /* Like */
-        .like-btn {
-            background-color: #fff0f3;
-            color: #e63959;
-        }
-
-        .like-btn:hover {
-            background-color: #ffd6df;
-        }
-
-        /* Share */
-        .share-btn {
-            background-color: #e8f3ff;
-            color: #1877f2;
-        }
-
-        .share-btn:hover {
-            background-color: #cfe5ff;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 15px 10px;
-            }
-
-            .composer {
-                padding: 12px;
-                margin-bottom: 20px;
-                gap: 8px;
-            }
-
-            .composer-profile {
-                width: 38px;
-                height: 38px;
-            }
-
-            .composer input {
-                padding: 12px;
-                font-size: 13px;
-            }
-
-            .post-btn {
-                padding: 11px 14px;
-                font-size: 12px;
-            }
-
-            .containerDiv {
-                padding: 18px;
-                padding-bottom: 80px;
-                margin-bottom: 18px;
-                border-radius: 12px;
-            }
-
-            .profile-pic {
-                width: 40px;
-                height: 40px;
-            }
-
-            .post-text {
-                font-size: 15px;
-            }
-
-            .post-image {
-                height: 230px;
-            }
-
-            .buttons {
-                left: 18px;
-                right: 18px;
-                bottom: 12px;
-                gap: 8px;
-            }
-
-            .buttons button {
-                padding: 10px 8px;
-                font-size: 12px;
-            }
-        }
-        .inputValueDiv{
-            display: flex;
-            justify-content: space-between;
-
-        }
-        .inputValueDiv {
+/* ---------- Header ---------- */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
-
-    background-color: white;
-    border: 1px solid #e4e6eb;
-    border-radius: 12px;
-
-    overflow-wrap: anywhere;
+    padding: 14px 32px;
+    margin-bottom: 32px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+header div { font-weight: 800; font-size: 20px; }
+header div::first-letter {
+    background: #4f46e5;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 10px;
+}
+header button {
+    background: #fff;
+    color: #111827;
+    border: 1px solid #d1d5db;
 }
 
-.inputValueDiv p {
-    flex: 1;
-    min-width: 0;
-    margin: 0;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
+/* ---------- Cards ---------- */
+.container, #output {
+    width: 640px;
+    max-width: calc(100% - 32px);
+    margin: 0 auto 24px;
 }
 
-.deleteBtn {
-    padding: 10px 15px;
-    border: none;
+.container {
+    padding: 28px;
+    background: #fff;
     border-radius: 20px;
-    background-color: #ffe5e5;
-    color: #d93025;
-    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(79,70,229,.06);
+}
+
+.container h1 { margin: 0; font-size: 28px; }
+
+/* second card: "Title" and "Content" become small labels */
+.container:nth-of-type(2) h1 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.container:nth-of-type(2) > p { font-size: 14px; font-weight: 700; margin: 18px 0 8px; }
+
+/* ---------- Inputs ---------- */
+input[type="text"], textarea {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+}
+
+textarea { min-height: 150px; resize: vertical; }
+
+input:focus, textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,.2);
+}
+
+/* ---------- Buttons ---------- */
+button {
+    padding: 10px 20px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
     cursor: pointer;
-    flex-shrink: 0;
+    transition: background .2s;
 }
+button:hover { background: #4338ca; }
 
-.deleteBtn:hover {
-    background-color: #ffcaca;
+.container button { display: block; margin: 18px 0 0 auto; }
+
+/* ---------- "Recent posts" heading ---------- */
+body > div:not([class]):not([id]) {
+    width: 640px;
+    max-width: calc(100% - 32px);
+    margin: 0 auto 12px;
 }
-    </style>
-</head>
+body > div:not([class]):not([id]) p:first-child { margin: 0; font-size: 22px; font-weight: 800; }
+body > div:not([class]):not([id]) p:last-child { display: none; }
 
+.post {
+    margin-bottom: 18px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(79,70,229,.06);
+}
+.post-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #4f46e5;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+}
+.author { font-weight: 700; }
+.date { font-size: 13px; color: #6b7280; }
+.post h3 { margin: 0 0 8px; font-size: 20px; font-weight: 800; }
+.post p { margin: 0; line-height: 1.6; color: #374151; }
+
+/* ---------- Your static post cards ---------- */
+.post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.post-header p { margin: 0; line-height: 1.6; color: #374151; }
+.profile-pic { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+.post-image { width: 100%; max-height: 360px; object-fit: cover; border-radius: 12px; }
+
+.container .buttons { display: flex; gap: 10px; margin-top: 14px; }
+.container .buttons button {
+    margin: 0;
+    background: #eef2ff;
+    color: #4f46e5;
+}
+.container .buttons button:hover { background: #e0e7ff; }
+</style>
 <body>
-    
-    <div class="composer">
-        <img
-            class="composer-profile"
-            src="wallpaper_5.jpeg"
-            alt="Your profile picture"
-        >
+    <header><div>B <span>myBlog</span></div> <button onclick="logOut()">Log Out</button></header>
+<div class="container">
+     <h1>Welcome</h1>
+  </div>
+<div class="container">
+     <h1>Title</h1>
+     <input type="text" id="inputTitle">
+     <p>Content</p>
+     <textarea name="text" id="textArea" placeholder="Write your post here..." id="textPost"></textarea>
+     <button onclick="post()">Post</button>
+ </div>
+ <div>
+        <p>Recent posts</p>
+        <p>post</p>
+ </div>
+   <div id="output"></div>
 
-        <input
-            type="text"
-            placeholder="Share your thoughts with everyone..."
-        id="inp1">
-
-        <button class="post-btn" onclick="postBtn()">Post</button>
-    </div>
-    <div id="output" class="outputDiv"></div>
-    <div class="containerDiv">
+   <div class="container">
         <div class="post-header">
             <img
                 class="profile-pic"
@@ -365,8 +184,7 @@
             <button class="share-btn">Share</button>
         </div>
     </div>
-    
-    <div class="containerDiv">
+    <div class="container">
         <div class="post-header">
             <img
                 class="profile-pic"
@@ -375,75 +193,22 @@
             >
 
             <p class="post-text" contenteditable="true">
-                Today's football game....was the toughest I've ever played...
-                but we won though...
+                Feeling...great today.....might just post myself
             </p>
         </div>
 
         <img
             class="post-image"
-            src="wallpaper_3.jpeg"
-            alt="Football post image"
+            src="wallpaper_2.jpeg"
+            alt="Post image"
         >
-
+      
         <div class="buttons">
             <button class="repost-btn">Repost</button>
             <button class="like-btn">Like</button>
             <button class="share-btn">Share</button>
         </div>
     </div>
-    <div class="containerDiv">
-        <div class="post-header">
-            <img
-                class="profile-pic"
-                src="wallpaper_5.jpeg"
-                alt="Profile picture"
-            >
-
-            <p class="post-text" contenteditable="true">
-                Enjoying the holiday....
-            </p>
-        </div>
-
-        <img
-            class="post-image"
-            src="wallpaper_4.jpeg"
-            alt="Holiday post image"
-        >
-
-        <div class="buttons">
-            <button class="repost-btn">Repost</button>
-            <button class="like-btn">Like</button>
-            <button class="share-btn">Share</button>
-        </div>
-    </div>
-    <div class="containerDiv">
-        <div class="post-header">
-            <img
-                class="profile-pic"
-                src="wallpaper_5.jpeg"
-                alt="Profile picture"
-            >
-
-            <p class="post-text" contenteditable="true">
-                Today's football game....was the toughest I've ever played...
-                but we won though...
-            </p>
-        </div>
-
-        <img
-            class="post-image"
-            src="wallpaper_5.jpeg"
-            alt="Football post image"
-        >
-
-        <div class="buttons">
-            <button class="repost-btn">Repost</button>
-            <button class="like-btn">Like</button>
-            <button class="share-btn">Share</button>
-        </div>
-    </div>
-    <button onclick="logOut()">Log out</button>
-  <script src="dashBoard.js"></script>
 </body>
+<script src="dashBoard.js"></script>
 </html>

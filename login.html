@@ -3,227 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900" rel="stylesheet">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #c4c3ca;
-            background-color: #1f2029;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            padding: 20px;
-        }
-
-        a {
-            cursor: pointer;
-            transition: all 200ms linear;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .link {
-            color: #c4c3ca;
-            text-decoration: none;
-        }
-
-        .link:hover {
-            color: #ffeba7;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .card-3d-wrap {
-            position: relative;
-            width: 440px;
-            max-width: 100%;
-            height: 400px;
-            perspective: 800px;
-            margin: 0 auto;
-        }
-
-        .card-front {
-            width: 100%;
-            height: 100%;
-            background-color: #2a2b38;
-            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
-            background-position: bottom center;
-            background-repeat: no-repeat;
-            background-size: 300%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 6px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .center-wrap {
-            position: absolute;
-            width: 100%;
-            padding: 0 35px;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            z-index: 2;
-        }
-
-        h4 {
-            font-size: 24px;
-            font-weight: 600;
-            margin: 0 0 30px;
-            color: #ffffff;
-        }
-
-        .form-group {
-            position: relative;
-            display: block;
-            margin: 0 0 15px;
-            padding: 0;
-        }
-
-        .form-style {
-            padding: 13px 20px 13px 20px;
-            height: 48px;
-            width: 100%;
-            font-weight: 500;
-            border-radius: 4px;
-            font-size: 14px;
-            line-height: 22px;
-            letter-spacing: 0.5px;
-            outline: none;
-            color: #c4c3ca;
-            background-color: #1f2029;
-            border: 1px solid transparent;
-            transition: all 200ms linear;
-            box-shadow: 0 4px 8px rgba(21, 21, 21, 0.2);
-        }
-
-        .form-style::placeholder {
-            color: #c4c3ca;
-            opacity: 0.7;
-        }
-
-        .form-style:focus {
-            border-color: #ffeba7;
-            box-shadow: 0 4px 12px rgba(255, 235, 167, 0.1);
-        }
-
-        .btn {
-            border-radius: 4px;
-            height: 44px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: all 200ms linear;
-            padding: 0 30px;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border: none;
-            background-color: #ffeba7;
-            color: #102770;
-            box-shadow: 0 8px 24px rgba(255, 235, 167, 0.2);
-            text-decoration: none;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background-color: #102770;
-            color: #ffeba7;
-            box-shadow: 0 8px 24px rgba(16, 39, 112, 0.2);
-        }
-
-        .forgot-password {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        @media (max-width: 480px) {
-            .card-3d-wrap {
-                height: 380px;
-            }
-
-            .center-wrap {
-                padding: 0 20px;
-            }
-        }
-    </style>
+    <title>Document</title>
 </head>
+<style>
+    * { box-sizing: border-box; }
 
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f4f5fb;
+        font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        color: #111827;
+    }
+
+    input[type="text"], input[type="password"] {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        background: #fff;
+        font-family: inherit;
+        font-size: 15px;
+        outline: none;
+        transition: border-color .2s, box-shadow .2s;
+    }
+
+    input:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+    }
+
+    button[type="button"] {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        padding: 12px 20px;
+        background: #4f46e5;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background .2s;
+        margin-bottom: 20px;
+    }
+
+    button[type="button"]:hover {
+        background: #4338ca;
+    }
+
+    p {
+        font-size: 14px;
+        color: #4b5563;
+        margin: 0;
+    }
+
+    a {
+        color: #4f46e5;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
 <body>
-
-<div class="card-3d-wrap">
-<div class="card-front">
-
-<div class="center-wrap">
-<div class="text-center">
-
-    <h4>Log In</h4>
-
-<form id="loginForm">
-
-<div class="form-group">
-    <input
-        type="email"
-        name="logemail"
-        class="form-style"
-        placeholder="Your Email"
-        id="logemail"
-        autocomplete="email"
-        required
-    >
-</div>
-
-<div class="form-group">
-    <input
-        type="password"
-        name="logpass"
-        class="form-style"
-        placeholder="Your Password"
-        id="logpass"
-        autocomplete="current-password"
-        required
-    >
-</div>
-
-<button type="submit" class="btn" onclick="login(event)">
-    Submit
-</button>
-
-    </form>
-
-    <p class="forgot-password">
-        <a href="#" class="link">Forgot your password?</a>
+    <input type="text" id="email" placeholder="Enter your Email">
+    <input type="password" placeholder="Enter your password" id="password">
+    <button type="button" onclick="logIn()">Log In</button>
+     <p>Don't have an account?
+            <a href="index.html">Sign Up</a>
     </p>
-
-</div>
-</div>
-
-</div>
-</div>
-
-    <script src="login.js">
- 
-    </script>
-
 </body>
+<script>
+    let users = JSON.parse(localStorage.getItem('userPractice')) || []
+    function logIn() {
+        let emailField = document.getElementById('email').value.trim()
+        let passwordField = document.getElementById('password').value.trim()
+
+        if (!emailField || !passwordField) {
+            alert('All fields are mandatory brochacho')
+        } else {
+            let foundUser = users.find((user) =>{ return user.email === emailField})
+            let foundUserIndex = users.find((user)=>{return user.email === emailField})
+            if (!foundUser) {
+                alert('Account doesnt exist, try signing up Brochacho')
+            } else {
+                if (foundUser.passWord !== passwordField) {
+                    alert('invalid credentials')
+                } else {
+                    alert('login Succesful')
+                    localStorage.setItem('currentUserIndex', JSON.stringify(foundUserIndex))
+                    window.location.href ='dashBoard.html'
+                }
+            }
+        }
+    }
+</script>
 </html>
